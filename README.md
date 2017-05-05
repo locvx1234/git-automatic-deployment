@@ -40,7 +40,7 @@ Thêm nội dung sau vào `post-receive`, ấn Ctrl+D để ghi nhận
 	git --work-tree=/var/www/domain.com --git-dir=/var/repo/site.git checkout -f
 	echo "Finish deploy"
 	
-Xem thêm : Code push theo branch xác định : 
+Xem thêm : Code push theo branch xác định : [post-receive](https://github.com/locvx1234/git-automatic-deployment/blob/master/post-receive)
 Cấp permission cho file 
 
 	chmod +x post-receive
