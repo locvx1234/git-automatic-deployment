@@ -6,6 +6,9 @@
 
  directory cần deploy: /var/www/domain.com
 
+ 
+NOTE: Với Gitlab, repo được tạo ở `/var/opt/gitlab/git-data/repositories/$USER/repository_name`
+
 ### Tạo một repo
 
 ```sh
@@ -33,8 +36,11 @@ Chúng ta cần quan tâm đến `post-receive`
 Thêm nội dung sau vào `post-receive`, ấn Ctrl+D để ghi nhận 
 
 	#!/bin/sh
+	echo "Start deploy"
 	git --work-tree=/var/www/domain.com --git-dir=/var/repo/site.git checkout -f
-
+	echo "Finish deploy"
+	
+Xem thêm : Code push theo branch xác định : 
 Cấp permission cho file 
 
 	chmod +x post-receive
@@ -48,16 +54,33 @@ mkdir project && cd project
 git init
 ```
 
-Cấu hình remote tới repo trên server remote với nhánh `live` 
+Cấu hình remote tới repo trên server deploy `live`  
 
-	git remote add live ssh://user@mydomain.com/var/repo/site.git
+	$ git remote add live ssh://user@mydomain.com/var/repo/site.git
 	echo "Hello " >> README.md
-	git add *
-	git commit -m "My project is ready"
-	git push live master
+	$ git add *
+	$ git commit -m "My project is ready"
+	$ git push live master
 	
-	
+Kết quả 
 
-	
+	$ git push live master
+	Counting objects: 5, done.
+	Compressing objects: 100% (2/2), done.
+	Writing objects: 100% (3/3), 301 bytes | 0 bytes/s, done.
+	Total 3 (delta 0), reused 0 (delta 0)
+	remote: Start deploy
+	remote: Finish deploy
+	To ssh://user@mydomain.com/var/repo/site.git
+		4b052f6..6ad7de4  master -> master
+		
+
+### Tham khảo 
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-automatic-deployment-with-git-with-a-vps
+
+Xem thêm về Git Hooks : https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks
+
+
 
 
