@@ -2,9 +2,9 @@
 
 ### Mô hình
 
- repo : /var/repo/site.git
+ repo : `/var/repo/site.git`
 
- directory cần deploy: /var/www/domain.com
+ directory deploy: `/var/www/domain.com`
 
  
 NOTE: Với Gitlab, repo được tạo ở `/var/opt/gitlab/git-data/repositories/$USER/repository_name`
@@ -22,7 +22,7 @@ Tùy chọn `bare` nghĩa là folder không có các tập tin nguồn, chỉ đ
 
 ### Hooks 
 
-Trong repo có một folder `hooks`, nó chứa các file mẫu cho phép bạn có thể tùy chỉnh các hành động.
+Trong mỗi repo git sẽ có một folder tên là `hooks`, nó chứa các file mẫu cho phép bạn có thể tùy chỉnh các hành động với dữ liệu trong quá trình git.
 
 Có 3 loại hooks :  `pre-receive`, `post-receive` và `update`.
 
@@ -40,8 +40,9 @@ Thêm nội dung sau vào `post-receive`, ấn Ctrl+D để ghi nhận
 	git --work-tree=/var/www/domain.com --git-dir=/var/repo/site.git checkout -f
 	echo "Finish deploy"
 	
-Xem thêm : Code push theo branch xác định : [post-receive](https://github.com/locvx1234/git-automatic-deployment/blob/master/post-receive)
-Cấp permission cho file 
+**Xem thêm :** Code push theo branch xác định : [post-receive](https://gist.github.com/lemiorhan/8912188)
+
+Cấp permission `+x` cho file 
 
 	chmod +x post-receive
 
